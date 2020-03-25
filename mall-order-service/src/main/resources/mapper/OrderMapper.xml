@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yx.mall.order.mapper.OrderMapper">
+
+    <select id="selectOrderAndItems" resultMap="selectOrderAndItemsMap" >
+        select o.id as o_id, oi.id as oi_id,
+        o.*,oi.*
+        from (select * from oms_order where order_sn=#{orderSn}) o
+        inner join oms_order_item oi on o.id=oi.order_id
+    </select>
+
+    <resultMap id="selectOrderAndItemsMap" type="com.yx.mall.bean.Order" autoMapping="true">
+        <result property="id" column="o_id"></result>
+        <collection property="orderItems" ofType="com.yx.mall.bean.OrderItem" autoMapping="true">
+            <result property="id" column="oi_id"></result>
+        </collection>
+    </resultMap>
+
+</mapper>
