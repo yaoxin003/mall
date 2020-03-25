@@ -78,8 +78,6 @@
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
-            <version>${jjtw.version}</version>
-
         </dependency>
 
     </dependencies>
