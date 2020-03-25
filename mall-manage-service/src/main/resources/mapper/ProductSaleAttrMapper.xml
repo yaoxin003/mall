@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="com.yx.mall.manage.mapper.ProductSaleAttrMapper">
+
+    <select id="selectProductSaleAttrAndValueListBySku" resultMap="selectProductSaleAttrAndValueListBySkuMap">
+        select psa.id as psa_id,psav.id as psav_id,if(ssav.id,1,0) as isChecked,psa.*,psav.*
+        from pms_product_sale_attr psa
+        inner join pms_product_sale_attr_value psav
+        on psa.product_id=psav.product_id and psa.sale_attr_id=psav.sale_attr_id and psa.product_id=#{productId}
+        left join pms_sku_sale_attr_value ssav on psav.id=ssav.sale_attr_value_id and ssav.sku_id=#{skuId}
+    </select>
+
+    <resultMap id="selectProductSaleAttrAndValueListBySkuMap" type="com.yx.mall.bean.ProductSaleAttr" autoMapping="true">
+        <result column="psa_id" property="id"/>
+        <result column="product_id" property="spuId"/>
+        <collection property="spuSaleAttrValueList" ofType="com.yx.mall.bean.ProductSaleAttrValue" autoMapping="true">
+            <result column="psav_id" property="id"/>
+            <result column="product_id" property="spuId"/>
+        </collection>
+    </resultMap>
+
+</mapper>

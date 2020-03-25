@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="com.yx.mall.manage.mapper.BaseAttrInfoMapper">
+
+    <select id="selectBaseAttrInfoListByBaseAttrValueIdList" resultMap="selectBaseAttrInfoListByBaseAttrValueIdListMap">
+        select bai.*,bav.*,bai.id as bai_id,bav.id as bav_id
+        from pms_base_attr_info bai
+        inner join pms_base_attr_value bav on bai.id=bav.attr_id
+        <if test="baseAttrValueIdList.size>0">
+            where bav.id in
+            <foreach collection="baseAttrValueIdList" item="baseAttrValueId" open="(" separator="," close=")">
+                #{baseAttrValueId}
+            </foreach>
+        </if>
+    </select>
+
+    <resultMap id="selectBaseAttrInfoListByBaseAttrValueIdListMap" type="com.yx.mall.bean.BaseAttrInfo" autoMapping="true">
+        <result column="bai_id" property="id"/>
+        <collection property="attrValueList" ofType="com.yx.mall.bean.BaseAttrValue" autoMapping="true">
+            <result column="bav_id" property="id"/>
+        </collection>
+    </resultMap>
+
+</mapper>

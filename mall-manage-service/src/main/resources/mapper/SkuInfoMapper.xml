@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="com.yx.mall.manage.mapper.SkuInfoMapper">
+
+    <select id="selectSkuSaleAttrValueListBySpu" resultMap="selectSkuSaleAttrValueListBySpuMap">
+        select si.id as si_id,ssav.id as ssav_id,si.*,ssav.*
+        from (select * from pms_sku_info where product_id=#{spuId}) si
+        inner join pms_sku_sale_attr_value ssav
+        on si.id=ssav.sku_id
+    </select>
+
+    <resultMap id="selectSkuSaleAttrValueListBySpuMap" type="com.yx.mall.bean.SkuInfo" autoMapping="true">
+        <result column="si_id" property="id"/>
+        <result column="product_id" property="spuId"/>
+        <collection property="skuSaleAttrValueList" ofType="com.yx.mall.bean.SkuSaleAttrValue" autoMapping="true">
+            <result column="ssav_id" property="id"/>
+        </collection>
+    </resultMap>
+
+</mapper>
