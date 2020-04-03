@@ -22,6 +22,16 @@ public class OrderServiceMqListener {
     @Autowired
     private OrderService orderService;
 
+    /**
+        * @description:
+        * 1.变更订单状态
+         * 2.发送MQ：消减库存
+        * @author:  YX
+        * @date:    2020/04/03 15:14
+        * @param: mapMessage
+        * @return: void
+        * @throws:
+        */
     @JmsListener(destination = MallConstant.MQ_PAYMENT_SUCCESS_QUEUE,containerFactory = "jmsQueueListener")
     public void comsumePaymentResult(MapMessage mapMessage) throws JMSException {
         String orderSn = mapMessage.getString("orderSn");

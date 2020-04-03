@@ -26,6 +26,12 @@ public class PaymentServiceMqListener {
     @Autowired
     private PaymentService paymentService;
 
+    /**
+     * 1.变更支付系统状态
+     * 2.发送MQ：变更订单状态（幂等性检查）
+     * @param mapMessage
+     * @throws JMSException
+     */
     @JmsListener(destination = MallConstant.MQ_PAYMENT_CHECK_QUEUE,containerFactory = "jmsQueueListener")
     public void consumePaymentStatusCheckResult(MapMessage mapMessage) throws JMSException{
         String orderSn = mapMessage.getString("orderSn");
