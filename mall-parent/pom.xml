@@ -47,7 +47,7 @@
         <beanUtils.version>1.9.3</beanUtils.version>
 
         <dubbo-starter.version>2.7.1</dubbo-starter.version>
-        <dubbo.version>2.7.1</dubbo.version>
+        <dubbo.version>2.7.15</dubbo.version>
 
         <jjtw.version>0.9.0</jjtw.version>
 
