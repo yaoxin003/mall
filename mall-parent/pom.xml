@@ -27,7 +27,7 @@
         <mall-web-util.version>1.0-SNAPSHOT</mall-web-util.version>
 
         <lombok.version>1.18.10</lombok.version>
-        <fastjson.version>1.2.46</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <mybatis.version>2.1.1</mybatis.version>
         <nekohtml.version>1.9.20</nekohtml.version>
         <xml-apis.version>1.4.01</xml-apis.version>
